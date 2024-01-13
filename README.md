@@ -1,1 +1,1 @@
-# holbertonschool-sorting_algorithms
+# Sorting_Algorithms
