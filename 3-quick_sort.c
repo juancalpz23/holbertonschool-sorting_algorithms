@@ -1,7 +1,11 @@
 #include "sort.h"
-
 /**
- * Lomuto partition scheme for quicksort
+ * lomuto_partition - Lomuto partition scheme for quicksort
+ * @array: The array to be partitioned
+ * @low: The low index of the partition
+ * @high: The high index of the partition
+ * @size: The size of the array
+ * Return: Index of the pivot element
  */
 int lomuto_partition(int *array, int low, int high, size_t size)
 {
@@ -30,22 +34,32 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 }
 
 /**
+ * quicksort - Function to implement quicksort using Lomuto partition scheme
+ * @array: The array to be sorted
+ * @low: The starting index of the partition
+ * @high: The ending index of the partition
+ * @size: The size of the array
+ */
+void quicksort(int *array, int low, int high, size_t size)
+{
+	if (low < high)
+	{
+		int pi = lomuto_partition(array, low, high, size);
+
+		quicksort(array, low, pi - 1, size);
+		quicksort(array, pi + 1, high, size);
+	}
+}
+
+/**
  * quick_sort - Implements quicksort using Lomuto partition scheme
  * @array: The array to be sorted
  * @size: The size of the array
  */
 void quick_sort(int *array, size_t size)
 {
-	void quicksort(int *array, int low, int high, size_t size)
-	{
-		if (low < high)
-		{
-			int pi = lomuto_partition(array, low, high, size);
+	if (array == NULL || size < 2)
+		return;
 
-			quicksort(array, low, pi - 1, size);
-			quicksort(array, pi + 1, high, size);
-		}
-	}
-
-	if (array == NULL || size
-
+	quicksort(array, 0, size - 1, size);
+}
